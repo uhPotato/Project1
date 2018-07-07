@@ -1,0 +1,77 @@
+@font-face {
+    font-family: CaveatBrush;
+    src: url(../fonts/CaveatBrush-Regular.ttf);
+}
+
+body {
+	background: url("../images/background.jpg");
+	font-family: CaveatBrush !important;
+	font-size: 28px;
+}
+
+table {
+	font-size: 20px;
+}
+
+input, select, button {
+	font-size: 20px !important;
+}
+
+#titleDiv, label {
+	text-shadow: 4px 4px 4px #aaa;
+}
+
+#myModalLabel {
+	font-size: 30px !important;
+	text-shadow: 4px 4px 4px #aaa;
+}
+
+#map {
+    height: 450px;
+    width: 900px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.myShowImage {
+	margin-bottom: 20px;
+}
+
+#modalRow1 {
+	margin-bottom: 10px;
+}
+
+#largerPOIimage {
+	height: 400px;
+}
+
+#wuLogo {
+	width: 150px;
+}
+
+#logoImage {
+	width: 100%;
+}
+
+#logoImageDiv {
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
+
+#image1, #image2, #image3, #image4, #image5, #image6 {
+	margin-top: 10px;
+}
+
+#userEntryRow {
+	margin-bottom: 30px;
+}
+
+#mapRow {
+    margin-top: 40px;
+    width: 80%;
+	margin-bottom: 30px;
+}
+
+#reloadButton {
+	margin-top: 20px;
+}
