@@ -8,12 +8,16 @@ index.html page will lead to the landing page which will have logo and input fie
 1.) INPUT FIELDS
     a.) first input field will be the destination to which the people want to go...
     b.) 2nd input field will be drop down list of the various points of interest
-        I.) could have the drop down seperated for each  
+        I.) could have the drop down seperated for each
 2.) Submission
     a.) upon submission the input data will be converted to JSON and then GET the coordinates and restaurants using the Google API
     b.) the following page will jave an additional field to change the location and cuisine at the top.
-    c.) Bellow that the google map will display with markers for each location 
+    c.) Bellow that the google map will display with markers for each location
 
-3.) person profile 
+3.) person profile
     a.) List of things to do...
     b.) allows complettion and deletion
+
+4.) Sign In Authentication
+    a.) A user can create an account for saving all search datas.
+    b.) There will be signin verification which will be sent to the user's email.
