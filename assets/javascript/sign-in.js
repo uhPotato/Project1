@@ -1,4 +1,5 @@
 
+
 //This will be where we use firebase authentication for signing into the application.
 
 $(document).ready(function(){
@@ -155,4 +156,3 @@ $(document).ready(function(){
     $("#email").val("");
   }
 });
-
