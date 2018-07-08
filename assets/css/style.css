@@ -75,3 +75,8 @@ input, select, button {
 #reloadButton {
 	margin-top: 20px;
 }
+
+.signInBtn {
+	float: right;
+	margin-bottom: 15px;
+}
