@@ -9,7 +9,7 @@ $(document).ready(function(){
     authDomain: "things-to-do-744e7.firebaseapp.com",
     databaseURL: "https://things-to-do-744e7.firebaseio.com",
     projectId: "things-to-do-744e7",
-    storageBucket: "",
+    storageBucket: "things-to-do-744e7.appspot.com",
     messagingSenderId: "807935759914"
   };
   firebase.initializeApp(config);
@@ -21,7 +21,7 @@ $(document).ready(function(){
   //Capturing the add user button click........................
   $("#add-user").on("click", function(event){
     console.log("hello1");
-    event.preventdefault();
+    event.preventDefault();
 
     //Initializing the variables.........................
     var firstName = "";
@@ -59,7 +59,7 @@ $(document).ready(function(){
       console.log(firstName, lastName, userName, password);
 
       //Creating a local temoporary object for holding user information............
-        /*var userDetail = {
+        var userDetail = {
         fname : firstName,
         lname : lastName,
         bDay : birthDate,
@@ -75,7 +75,7 @@ $(document).ready(function(){
       };
 
       //upload the user details to the database...............
-      database.ref().push(userDetail);*/
+      database.ref().push(userDetail);
 
       //All the fields will be cleared once the user click on the submit button...............
       reset();
@@ -91,7 +91,7 @@ $(document).ready(function(){
   });
 
   //Creating a firebase event for adding user details to the database ........................
-  /*database.ref().on("child_added", function(childSnapshot, preChildKey){
+  database.ref().on("child_added", function(childSnapshot, preChildKey){
     console.log("The childSnapshot: " + childSnapshot);
 
     //Store to a variable....................
@@ -108,12 +108,12 @@ $(document).ready(function(){
     var userEmail = childSnapshot.val().email;
   }, function(errorObject){
     console.log("The error message: " + errorObject.code);
-  });*/
+  });
 
   //This function is called when the user submit its signin form in the modal window................
   function signinSummary(){
     $("#modal-window").show();
-    $("#signIn").fadeOut();
+    $("#signIn").hide();
     var txt1 = $("<h3></h3>").text("Sign-In summary");
     var txt2 = $("<p></p>").text("Full Name : " + fName + "" + lName);
     var txt3 = $("<p></p>").text("Birth Date: " + bDay);
@@ -130,7 +130,7 @@ $(document).ready(function(){
   //This function will be called when the user click on the submit button without filling the form..................
   function validateform() {
     $("#validate-window").show();
-    $("#signIn").fadeOut();
+    $("#signIn").hide();
 
     //Creating a variable to store the error message to be displayed........................
     var message = $("<h3></h3>").text("All flieds are mandatory to be filled.");
