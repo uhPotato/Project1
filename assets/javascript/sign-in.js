@@ -4,7 +4,7 @@ $(document).ready(function(){
   $("#validate-window").hide();
 
   // Initialize Firebase
-  /*var config = {
+  var config = {
     apiKey: "AIzaSyAHKzVuDz5Fzb_siJvcEC0tYakcxc9dyhY",
     authDomain: "things-to-do-744e7.firebaseapp.com",
     databaseURL: "https://things-to-do-744e7.firebaseio.com",
@@ -15,7 +15,7 @@ $(document).ready(function(){
   firebase.initializeApp(config);
 
   //Declaring a variable to store the database info...................
-  var database = firebase.database();*/
+  var database = firebase.database();
 
    console.log("hello reena");
   //Capturing the add user button click........................
