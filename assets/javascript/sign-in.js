@@ -1,3 +1,7 @@
+
+
+//This will be where we use firebase authentication for signing into the application.
+
 $(document).ready(function(){
   //Modal window and validate window are hidden..................
   $("#modal-window").hide();
