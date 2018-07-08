@@ -1,0 +1,12 @@
+.modal1{
+    /*display : none;*/
+    margin : auto;
+    margin-top : 50px;
+    z-index : 1;
+    width : 30%;
+    height : auto;
+    overflow : auto;
+    background : white;
+    font-size : 20px;
+    border-radius : 10px;
+  }

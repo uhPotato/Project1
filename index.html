@@ -35,188 +35,185 @@
 </head>
 
 <body>
-	<div>
-  	<button id = "signIn">Sign In</button>
-  </div>
-	<!-- begin the bootstrap container -->
-	<div class="container">
+	<div class = "container" id = "main-page">
+		<div>
+  			<button id = "signIn">Sign In</button>
+  		</div>
+		<!-- begin the bootstrap container -->
+		<div class="container">
 
-		<!-- title - will be populated later via JS when logo disappears after location is selected -->
-		<div class="row">
-			<div class="col-md-12 page-header" id="titleDiv">
-		</div>
-	</div>
+			<!-- title - will be populated later via JS when logo disappears after location is selected -->
+			<div class="row">
+				<div class="col-md-12 page-header" id="titleDiv"></div>
+			</div>
 
-		<!-- begin by having logo displayed -->
-		<div class="row" id="logoImageDiv">
-			<div class="col-md-12">
-				<div class="well well-lg">
-					<img src="assets/images/HPLogo.png" class="img-responsive" id="logoImage" alt="Things Logo">
+			<!-- begin by having logo displayed -->
+			<div class="row" id="logoImageDiv">
+				<div class="col-md-12">
+					<div class="well well-lg">
+						<img src="assets/images/HPLogo.png" class="img-responsive" id="logoImage" alt="Things Logo">
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<!-- Modal for when nonsense location entered by user -->
-		<div class="row">
-			<div class="col-md-12">
-				<!-- Modal -->
-				<div class="modal fade" id="badLocationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  					<div class="modal-dialog modal-sm" role="document">
-    					<div class="modal-content">
-     						<div class="modal-header">
-        						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        						<h4 class="modal-title">Please enter a valid location!</h4>
-      						</div>
-    					</div>
-  					</div>
-				</div>
-			</div>
-		</div>
-		<!-- End of nonsense location modal code -->
-
-		<!-- Code for the modal that will display point of interest info detail -->
-		<div class="row">
-			<div class="col-md-12">
-				<!-- Modal -->
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  					<div class="modal-dialog modal-lg" role="document">
-    					<div class="modal-content">
-     						<div class="modal-header">
-        						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        						<h4 class="modal-title" id="myModalLabel">ADDRESS GOES HERE</h4>
-      						</div>
-      						<div class="modal-body" id="myModalContent">
-      							<!-- first row holds the POI larger image and a small map w/marker -->
-      							<div class="row" id="modalRow1">
-      								<div class="col-md-8" id="myModalPOIImage"></div>
-      								<div class="col-md-4" id="myModalMapImage"></div>
+			<!-- Modal for when nonsense location entered by user -->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- Modal -->
+					<div class="modal fade" id="badLocationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  						<div class="modal-dialog modal-sm" role="document">
+    						<div class="modal-content">
+     							<div class="modal-header">
+        							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        							<h4 class="modal-title">Please enter a valid location!</h4>
       							</div>
-
-      						</div>
-    					</div>
-  					</div>
+    						</div>
+  						</div>
+					</div>
 				</div>
 			</div>
+			<!-- End of nonsense location modal code -->
+
+			<!-- Code for the modal that will display point of interest info detail -->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- Modal -->
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  						<div class="modal-dialog modal-lg" role="document">
+    						<div class="modal-content">
+     							<div class="modal-header">
+        							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        							<h4 class="modal-title" id="myModalLabel">ADDRESS GOES HERE</h4>
+      							</div>
+      							<div class="modal-body" id="myModalContent">
+      								<!-- first row holds the POI larger image and a small map w/marker -->
+      								<div class="row" id="modalRow1">
+      									<div class="col-md-8" id="myModalPOIImage"></div>
+      									<div class="col-md-4" id="myModalMapImage"></div>
+      								</div>
+	      						</div>
+    						</div>
+  						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End of the point of interest modal code -->
+
+			<!-- location / venue / buttons row -->
+			<div class="row" id="userEntryRow">
+
+				<!-- location and venue div -->
+				<div class="col-md-12 text-center">
+
+					<!-- begin our form-->
+					<form class="form-inline">
+
+						<!-- first input is for the location -->
+		  				<div class="form-group">
+		    				<label for="location">Location: </label>
+		    				<input type="text" class="form-control" list="savedLocations" id="location" placeholder="Destination">
+		    				<datalist id="savedLocations"></datalist>
+		  				</div>
+
+						<!-- second input is for the venue type -->
+		  				<div class="form-group">
+	    					<label for="venue"> Venue: </label>
+		   					<select class="form-control" id="venue">
+		   						<option>Amusement Park</option>
+		   						<option>Art Gallery</option>
+		   						<option>Museum</option>
+		   						<option>Park</option>
+		   						<option>Zoo</option>
+							</select>
+	  					</div>
+
+						<!-- go button div -->
+						<button type="submit" class="btn btn-danger" id="goButton">GO!</button>
+
+						<!-- reset button div -->
+						<button type="reset" class="btn btn-danger" id="resetButton">RESET!</button>
+					</form>
+
+					<!-- end of location and venue div and column -->
+				</div>
+				<!-- end of location and venue row -->
+			</div>
+
+			<!-- map row -->
+			<div class="row" id="mapRow">
+				<div class="panel panel-default">
+				<div class="panel-body">
+	    		<!-- populate map in this column -->
+		    	<div class="col-md-12 col-lg-10" id="map"></div>
+			</div></div></div>
+
+			<!-- photos row -->
+			<div class="row" id="photosDiv">
+				<div class="panel panel-default">
+				<div class="panel-body">
+
+					<!-- column 1 -->
+					<div class="col-md-3 col-lg-2">
+
+						<!-- image 1 row -->
+						<div class="row">
+							<div class="col-md-12" id="image1"></div>
+						</div>
+
+						<!-- imaged 4 row -->
+						<div class="row">
+							<div class="col-md-12" id="image4"></div>
+						</div>
+
+						<!-- end column 1 -->
+					</div>
+
+					<!-- column 2 -->
+					<div class="col-md-3">
+
+						<!-- image 2 row -->
+						<div class="row">
+							<div class="col-md-12" id="image2"></div>
+						</div>
+
+						<!-- image 5 row -->
+						<div class="row">
+							<div class="col-md-12" id="image5"></div>
+						</div>
+
+						<!-- end column 2 -->
+					</div>
+
+					<!-- column 3 -->
+					<div class="col-md-3">
+
+						<!-- image 3 row -->
+						<div class="row">
+							<div class="col-md-12" id="image3"></div>
+						</div>
+
+						<!-- image 6 row -->
+						<div class="row">
+							<div class="col-md-12" id="image6"></div>
+						</div>	
+
+						<!-- end column 3 -->
+					</div>
+
+					<!-- column 4 -->
+					<!-- reload button - empty for now - populate with function that loads images -->
+					<div class="col-md-3" id="reloadButtonDiv">
+
+						<!-- end column 4 -->
+					</div>
+
+					<!-- end photos row -->
+				</div></div>
+			</div>
+			<!-- end the bootstrap container -->
 		</div>
-		<!-- End of the point of interest modal code -->
-
-		<!-- location / venue / buttons row -->
-		<div class="row" id="userEntryRow">
-
-			<!-- location and venue div -->
-			<div class="col-md-12 text-center">
-
-				<!-- begin our form-->
-				<form class="form-inline">
-
-					<!-- first input is for the location -->
-		  			<div class="form-group">
-		    			<label for="location">Location: </label>
-		    			<input type="text" class="form-control" list="savedLocations" id="location" placeholder="Destination">
-		    			<datalist id="savedLocations"></datalist>
-		  			</div>
-
-					<!-- second input is for the venue type -->
-		  			<div class="form-group">
-	    				<label for="venue"> Venue: </label>
-		   				<select class="form-control" id="venue">
-		   					<option>Amusement Park</option>
-		   					<option>Art Gallery</option>
-		   					<option>Museum</option>
-		   					<option>Park</option>
-		   					<option>Zoo</option>
-						</select>
-	  				</div>
-
-					<!-- go button div -->
-					<button type="submit" class="btn btn-danger" id="goButton">GO!</button>
-
-					<!-- reset button div -->
-					<button type="reset" class="btn btn-danger" id="resetButton">RESET!</button>
-
-				</form>
-
-			<!-- end of location and venue div and column -->
-			</div>
-
-		<!-- end of location and venue row -->
-		</div>
-
-
-		<!-- map row -->
-		<div class="row" id="mapRow">
-		<div class="panel panel-default">
-		<div class="panel-body">
-	    	<!-- populate map in this column -->
-		    <div class="col-md-12 col-lg-10" id="map"></div>
-		</div></div></div>
-
-		<!-- photos row -->
-		<div class="row" id="photosDiv">
-		<div class="panel panel-default">
-		<div class="panel-body">
-
-			<!-- column 1 -->
-			<div class="col-md-3 col-lg-2">
-
-				<!-- image 1 row -->
-				<div class="row">
-					<div class="col-md-12" id="image1"></div>
-				</div>
-
-				<!-- imaged 4 row -->
-				<div class="row">
-					<div class="col-md-12" id="image4"></div>
-				</div>
-
-			<!-- end column 1 -->
-			</div>
-
-			<!-- column 2 -->
-			<div class="col-md-3">
-
-				<!-- image 2 row -->
-				<div class="row">
-					<div class="col-md-12" id="image2"></div>
-				</div>
-
-				<!-- image 5 row -->
-				<div class="row">
-					<div class="col-md-12" id="image5"></div>
-				</div>
-
-			<!-- end column 2 -->
-			</div>
-
-			<!-- column 3 -->
-			<div class="col-md-3">
-
-				<!-- image 3 row -->
-				<div class="row">
-					<div class="col-md-12" id="image3"></div>
-				</div>
-
-				<!-- image 6 row -->
-				<div class="row">
-					<div class="col-md-12" id="image6"></div>
-				</div>
-
-			<!-- end column 3 -->
-			</div>
-
-			<!-- column 4 -->
-			<!-- reload button - empty for now - populate with function that loads images -->
-			<div class="col-md-3" id="reloadButtonDiv">
-
-			<!-- end column 4 -->
-			</div>
-
-			<!-- end photos row -->
-			</div></div>
-			</div>
-
-	<!-- end the bootstrap container -->
 	</div>
+
 
 	<!-- Link to modal JS -->
     <!-- <script type="text/javascript" src="assets/javascript/modal.js"></script> -->
