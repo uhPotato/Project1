@@ -1,0 +1,76 @@
+
+
+#signup{
+  margin-top : 20px;
+  background: url("../images/Aspen\ summer.jpg") no-repeat center center fixed;
+  background-size: 100%;
+  background-size: cover;
+  background-blend-mode: exclusion;
+  font-family: 'Dancing Script', cursive;
+  font-size: 20px;
+  font-weight: bolder;
+  letter-spacing: .35em;;
+}
+
+.card {
+  margin-top : 20px;
+  background: transparent;
+  border : none;
+  color : white;
+  font-weight: 900px;
+}
+
+.form-control {
+  margin : 2px;
+  padding : 6px;
+  font-size : 20px;
+  font-weight : bold;
+  letter-spacing: .35em;
+  color: goldenrod;
+  border : none;
+}
+
+.ucity, .ustate, .uzip, .uphone, .uemail {
+  background-color : rgba(230, 230, 0, .5);
+  /*color : rgb(5, 31, 70);*/
+  border : none;
+}
+
+.modal {
+  /*display : none;*/
+  margin : auto;
+  z-index : 1;
+  width : auto;
+  height : auto;
+  overflow : auto;
+  background: url("../images/Aspen\ summer.jpg") no-repeat center center fixed;
+  font-size : 20px;
+  border-radius : 10px;
+}
+
+.modal-dialog {
+ margin-top : 150px;
+}
+.modal-header, .modal-footer {
+  background-color : blue;
+  color : white;
+  align-items: center;
+}
+.modal-body {
+  background-color : lightskyblue;
+}
+button {
+  align-self: center;
+}
+#add-user, #reset-user {
+  margin : 0 5px;
+  background : transparent;  /* rgb(26, 117, 255);*/
+  border : none;
+  padding : 5px 10px;
+  cursor: pointer;
+  color : white;
+  font-size :20px;
+  font-weight: bolder;
+  letter-spacing: .25em;
+}
+  
