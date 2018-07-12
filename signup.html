@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <!-- link for the google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
     <!-- link for the firebase library -->
     <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
     <!-- link for the moment.js library -->
@@ -23,68 +24,72 @@
               <h2 class = "text-center"><i class="fas fa-user-plus"></i>Sign Up Form</h5>
             </div>
             <div class = "card-body">
-              <form role = "form" id = "form-input">
+              <form role = "form" id = "form-input" autocomplete="on">
                 <div class = "row">
                   <div class = "col-md-4"></div>
                   <div class = "col-md-4">
                     <div class = "form-group row">
-                      <label for = "first-name">First Name: </label>
-                      <input required class = "form-control" id = "fName-input" type = "text" name = "fname" autocomplete="on">
+                      <label for = "first_name">First Name: </label>
+                      <input  class = "form-control" id = "first_name" type = "text" name = "first_name" autocomplete="on">
                     </div>
                   </div>
                   <div class = "col-md-4">
                     <div class = "form-group row">
-                      <label for = "last-name">Last Name: </label>
-                      <input required class = "form-control" id = "lName-input" type = "text" name = "lname" autocomplete="on">
+                      <label for = "last_name">Last Name: </label>
+                      <input class = "form-control" id = "last_name" type = "text" name = "last_name" autocomplete="on">
                     </div>
                   </div>
                 </div>
                 <div class = "row">
                   <div class = "col-md-4"></div>
-                  <div class = "col-md-4"></div>
                   <div class = "col-md-4">
-                    <label for = "birth-date">Birth Date: </label>
-                    <input required class = "form-control" id = "bDay-input" type = "date">
+                    <label for = "birth_date">Birth Date: </label>
+                    <input class = "form-control" id = "birth_date" name = "birth_date" type = "date">
+                  </div>
+                  <div class = "col-md-4">
+                    <div class = "form-group row">
+                      <label for = "user_name">User Name: </label>
+                      <input class = "form-control" id = "user_name" name = "user_name" type = "text">
+                    </div>
                   </div>
                 </div>
                 <div class = "row">
-                  <div class = "col-md-4"></div>
-                  <div class = "col-md-4">
+                  <div class = "col-md-3"></div>
+                  <div class = "col-md-3"></div>
+                  <div class = "col-md-3">
                     <div class = "form-group row">
-                      <label for = "user-name">User Name: </label>
-                      <input required class = "form-control" id = "uName-input" minlength = "5" maxlength = "9" type = "text">
+                      <label for = "password">Password: </label>
+                      <input class = "form-control" id = "password" name = "password" type = "password">
                     </div>
                   </div>
-                  <div class = "col-md-4">
-                    <div class = "form-group row">
-                      <label required for = "password">Password: </label>
-                      <input class = "form-control" id = "pwd-input" type = "password">
+                  <div class = "col-md-3">
+                      <div class = "form-group row">
+                        <label for = "confirm_password" id = "cpwd">Confirm Password: </label>
+                        <input class = "form-control" id = "confirm_password" name = "confirm_password" type = "password">
+                      </div>
                     </div>
-                  </div>
                 </div>
                 <div class = "row">
                   <div class = "col-md-6"></div>
                   <div class = "col-md-6">
                     <div class = "form-group row">
-                      <label for = "user address">Address: </label>
-                      <input required class = "form-control" id = "add-input" type = "text" name = "uadd" autocomplete="on">
+                      <label class = "uadd" for = "user_address">Address: </label>
+                      <input class = "form-control" id = "user_address" type = "text" name = "user_address" autocomplete="on">
                     </div>
                   </div>
                 </div>
                 <div class = "row">
-                  <div class = "col-md-2"></div>
-                  <div class = "col-md-2"></div>
-                  <div class = "col-md-2"></div>
+                  <div class = "col-md-6"></div>
                   <div class = "col-md-2">
                     <div class = "form-group row">
-                      <label  class = "ucity"for = "user city">City: </label>
-                      <input required class = "form-control" id = "city-input" type = "text" name = "ucity" autocomplete="on">
+                      <label  class = "ucity"for = "user_city">City: </label>
+                      <input class = "form-control" id = "user_city" type = "text" name = "user_city" autocomplete="on">
                     </div>
                   </div>
                   <div class = "col-md-2">
                     <div class = "form-group row">
-                      <label class = "ustate" for = "user state">State: </label>
-                      <select class="form-control" id="state-input">
+                      <label class = "ustate" for = "user-state">State: </label>
+                      <select class="form-control" id="user_state">
                         <option>AL</option> <option>AK</option> <option>AZ</option> <option>AR</option> <option>CA</option>     <option>CO</option> <option>CT</option> <option>DE</option> <option>FL</option> <option>GA</option>
                         <option>HI</option> <option>ID</option> <option>IL</option> <option>IN</option> <option>IA</option>     <option>KS</option> <option>KY</option> <option>LA</option> <option>MA</option> <option>ME</option>
                         <option>MD</option> <option>MI</option> <option>MN</option> <option>MS</option> <option>MO</option>     <option>MT</option> <option>NE</option> <option>NV</option> <option>NH</option> <option>NJ</option>
@@ -95,8 +100,8 @@
                   </div>
                   <div class = "col-md-2">
                     <div class = "form-group row">
-                      <label class = "uzip" for = "user zipcode">Zipcode: </label>
-                      <input required class = "form-control" id = "zip-input" type = "number" minlength = "5" maxlength = "5" name = "zcode" autocomplete="on">
+                      <label class = "uzip" for = "user_zipcode">Zipcode: </label>
+                      <input class = "form-control" id = "user_zipcode" type = "number" minlength = "5" maxlength = "5" name = "user_zipcode">
                     </div>
                   </div>
                 </div>
@@ -104,51 +109,35 @@
                   <div class = "col-md-5"></div>
                   <div class = "col-md-3">
                     <div class = "form-group row">
-                      <label class = "uphone" for = "user phone">Mobile No: </label>
-                      <input required class = "form-control" id = "phone-input" minlength = "10" maxlength = "10" type ="tel">
+                      <label class = "uphone" for = "user_phone">Mobile No: </label>
+                      <input class = "form-control" id = "user_phone" type = "number" minlength = "10" maxlength = "10" name = "user_phone">
                     </div>
                   </div>
                   <div class = "col-md-4">
                     <div class = "form-group row">
-                      <label class = "uemail" for = "user email">Email: </label>
-                      <input required class = "form-control" id = "email-input" type ="email">
+                      <label class = "uemail" for = "user_email">Email: </label>
+                      <input class = "form-control" id = "user_email" name = "user_email" type ="email">
                     </div>
                   </div>
                 </div>
-                <div class = "row">
+                <div class = "form-group row">
                   <div class = "col-md-6"></div>
                   <div class = "col-md-4">
-                    <button type = "submit" id = "add-user">Submit</button>
-                    <button  type = "reset" id = "reset-user">Reset</button>
+                    <button type = "submit" id = "add-user" name = "add_user">Submit</button>
+                    <button  type = "reset" id = "reset-user"name = "reset_user">Reset</button>
                   </div>
                   <div class = "col-md-2"></div>
+                </div>
+                <div class = "row">
+                  <div class = "col-sm-12" id = "error_display"></div>
+                  </div>
                 </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-      <div id = "validate-window" class = "modal">
-        <div class = "modal-dialog">
-          <div class = "modal-content">
-
-            <!-- Modal Header -->
-            <div class = "modal-header">
-              <h4 class = "modal-title">User Validation</h4>
-              <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
-            </div>
-
-            <!-- Modal Body -->
-            <div class="modal-body" id = "validate-message"></div>
-
-            <!-- Modal Footer -->
-            <div class = "modal-footer">
-              <button><a href = "signup.html">OK</a></button>
-            </div>
-          </div>
-        </div>
-      </div>
-       
+      <!--HTML code for modal window for summary........................  -->
       <div id = "modal-window" class = "modal">
         <div class = "modal-dialog">
           <div class = "modal-content">
@@ -173,6 +162,8 @@
     <script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
     <!--Link to the signup javascript -->
     <script type = "text/javascript" src = "assets/javascript/sign-up.js"></script>
   </body>

@@ -6,7 +6,7 @@
   background-size: 100%;
   background-size: cover;
   background-blend-mode: exclusion;
-  font-family: 'Dancing Script', cursive;
+  font-family: 'PT Sans', sans-serif;
   font-size: 20px;
   font-weight: bolder;
   letter-spacing: .35em;;
@@ -16,7 +16,8 @@
   margin-top : 20px;
   background: transparent;
   border : none;
-  color : white;
+  color : rgb(87, 4, 4);
+  font-display : block;
   font-weight: 900px;
 }
 
@@ -26,18 +27,21 @@
   font-size : 20px;
   font-weight : bold;
   letter-spacing: .35em;
-  color: goldenrod;
+  color: rgb(172, 34, 10);
   border : none;
 }
 
-.ucity, .ustate, .uzip, .uphone, .uemail {
+.uadd, .ucity, .ustate, .uzip, .uphone, .uemail {
   background-color : rgba(230, 230, 0, .5);
   /*color : rgb(5, 31, 70);*/
   border : none;
 }
 
+#cpwd{
+  letter-spacing: .1em;
+}
+
 .modal {
-  /*display : none;*/
   margin : auto;
   z-index : 1;
   width : auto;
@@ -52,15 +56,24 @@
  margin-top : 150px;
 }
 .modal-header, .modal-footer {
-  background-color : blue;
+  background-color : goldenrod;
   color : white;
   align-items: center;
 }
 .modal-body {
-  background-color : lightskyblue;
+  background-color : gold;
 }
 button {
   align-self: center;
+  background : transparent;
+  border : none;
+}
+
+button a {
+  color : rgb(87, 4, 4);
+  text-decoration: none;
+  font-size : 25px;
+  letter-spacing: .15em;
 }
 #add-user, #reset-user {
   margin : 0 5px;
