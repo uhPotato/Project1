@@ -43,14 +43,15 @@
                 <div class = "row">
                   <div class = "col-md-4"></div>
                   <div class = "col-md-4">
-                    <label for = "birth_date">Birth Date: </label>
-                    <input class = "form-control" id = "birth_date" name = "birth_date" type = "date">
-                  </div>
-                  <div class = "col-md-4">
                     <div class = "form-group row">
                       <label for = "user_name">User Name: </label>
                       <input class = "form-control" id = "user_name" name = "user_name" type = "text">
                     </div>
+                  </div>
+                  <div class = "col-md-4">
+                    <label for = "age" >Are you above 18 years?    <!--/label>"birth_date">Birth Date: </label-->
+                    <!-- <input class = "form-control" id = "birth_date" name = "birth_date" type = "date"> -->
+                    <span><input type = "checkbox" name = "birth_date" id = "birth_date" required></span>
                   </div>
                 </div>
                 <div class = "row">
@@ -152,7 +153,7 @@
 
             <!-- Modal Footer -->
             <div class = "modal-footer">
-              <button><a href = "index.html">Save</a></button>
+              <button id = "addtodata"><a href = "index.html">Save</a></button>
               <button><a href = "signup.html">Back</a></button>
             </div>
           </div>

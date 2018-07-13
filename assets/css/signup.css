@@ -31,6 +31,21 @@
   border : none;
 }
 
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 10px;
+}
+#birth_date{
+  margin : 10px;
+  padding : 10px;
+  font-size : 110%;
+  display : inline;
+}
 .uadd, .ucity, .ustate, .uzip, .uphone, .uemail {
   background-color : rgba(230, 230, 0, .5);
   /*color : rgb(5, 31, 70);*/

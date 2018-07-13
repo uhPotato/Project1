@@ -15,7 +15,16 @@ $(document).ready(function(){
 
   //Declaring a variable to store the database info...................
   var database = firebase.database();
+  database.ref().on("value", function(snapshot){
+  for (var obj in snapshot.val()) {
+    console.log("snapshot.val()[obj[1]]");
+    console.log(snapshot.val());
 
+    //check each object email and compare to user email;
+    //if found return false;
+  }
+  //if found return true;
+  });
   //Initializing the variables.........................
   var firstName = "";
   var lastName = "";
@@ -44,7 +53,7 @@ $(document).ready(function(){
 
   //Capturing the add user button click........................
   $("#add-user").on("click", function(event){
-    event.preventDefault();    
+    event.preventDefault();  
 
     if ($("#first_name").val(), $("#last_name").val(), $("#birth_date").val(), $("#user_name").val(), $("#password").val(), $("#user_address").val(),$("#user_zipcode").val(), $("#user_phone").val(), $("#user_email").val() === "") {
 
@@ -53,19 +62,84 @@ $(document).ready(function(){
        var input = $("#first_name").focus();
 
     } else {
+
+      //Storing the user input values to the variables................................
+      firstName = $("#first_name").val().trim();
+      lastName = $("#last_name").val().trim();
+      birthDate = $("#birth_date").val().trim();
+      userName = $("#user_name").val().trim();
+      password = $("#password").val().trim();
+      confirmPassword = $("#confirm_password").val().trim();
+      userAdd = $("#user_address").val().trim();
+      userCity = $("#user_city").val().trim();
+      userState = $("#user_state").val().trim();
+      userZip = $("#user_zipcode").val().trim();
+      userPhone = $("#user_phone").val().trim();
+      userEmail = $("#user_email").val().trim();
+      console.log("This is the user input details: " + first_name );
+
+      //Then the summaryModal function is called which will display the summary of the user's input
+      // informations before its saved into the database.
+      summaryModal();
+    
+      //Capturing the save button of the summary page, so the user will check their entry and save to the database..
+      $("#addtodata").on("click", function(){
+        //Creating a local temoporary object for holding user information............
+        var userDetail = {
+          fname : firstName,
+          lname : lastName,
+          bDay : birthDate,
+          uname : userName,
+          pwd : password,
+          cpwd : confirmPassword,
+          add : userAdd,
+          city : userCity,
+          state : userState,
+          zip : userZip,
+          phone : userPhone,
+          email : userEmail,
+          dateAdded : firebase.database.ServerValue.TIMESTAMP
+        };
+         
+        //upload the user details to the database...............
+        database.ref().push(userDetail);
+      
+       //Creating a firebase event for adding user details to the database ........................
+        database.ref().on("child_added", function(childSnapshot, preChildKey){
+        console.log("The childSnapshot: " + childSnapshot);
+       
+        //Store to a variable....................
+        var firstName = childSnapshot.val().fname;
+        var lastName = childSnapshot.val().lname;
+        var birthDate = childSnapshot.val().bDay;
+        var userName = childSnapshot.val().uname;
+        var password = childSnapshot.val().pwd;
+        var confirmPassword = childSnapshot.val().cpwd;
+        var userAdd = childSnapshot.val().add;
+        var userCity = childSnapshot.val().city;
+        var userState = childSnapshot.val().state;
+        var userZip = childSnapshot.val().zip;
+        var userPhone = childSnapshot.val().phone;
+        var userEmail = childSnapshot.val().email;
+        }, function(errorObject){
+        console.log("The error message: " + errorObject.code);
+      }); //end of database.ref() ......................
+            
       //Calling the compareDate() to compare dates.............
-      compareDate();
+      /*compareDate();
      
-      if ((birthYear < nowYear) || (birthYear === nowYear && birthMonth < nowMonth) || (birthYear === nowYear && birthMonth === nowMonth && birthDay < nowDay)) {
+     // if ((birthYear < nowYear) || (birthYear === nowYear && birthMonth < nowMonth) || (birthYear === nowYear && birthMonth === nowMonth && birthDay < nowDay)) {
         //Calling the age calculation function....................
         getAge();
 
-      } else { //if ((birthYear > nowYear) || (birthYear === nowYear && birthMonth > nowMonth) || (birthYear === nowYear && birthMonth === nowMonth && birthDay > nowDay)) {
-        var input = $("#birth_date").focus();
-        var msg1 = $("<h3 class = 'text-center'>").text("Input date cannot be greater than current date.").css("color", "red");
-        $("#error_display").append (msg1);
-      } 
+      //} else { //if ((birthYear > nowYear) || (birthYear === nowYear && birthMonth > nowMonth) || (birthYear === nowYear && birthMonth === nowMonth && birthDay > nowDay)) {
+       // var input = $("#birth_date").focus();
+        //var msg1 = $("<h3 class = 'text-center'>").text("Input date cannot be greater than current date.").css("color", "red");
+       // $("#error_display").append (msg1);
+      } */
+      }); //add to addtodata click button function................
     }      
+    
   });    //End of add-user button click........................
 
   //Capturing the reset button, where all fields in HTML will be initialized...............
@@ -126,6 +200,7 @@ $(document).ready(function(){
           minlength : "Your username must consist of atleast 5 characters",
           maxlength : "Your username must consist of max 9 characters",
         },
+        birth_date : "The user has to be 18 years to signup!",
         password : {
           required : "Please provide a password", 
           minlength: "Your password must consist of atleast 6 characters",
@@ -145,7 +220,8 @@ $(document).ready(function(){
       },
       submitHandler : function(form) {
         $(form).summaryModal();
-      }    
+      } 
+       
     });
   } //End of validateForm function.................................
 
@@ -168,7 +244,7 @@ $(document).ready(function(){
   } //End of reset function...................................
 
   //Function for comparing than current date with the input date......................
-  function compareDate() {
+ /* function compareDate() {
 
     //Getting the current date's year, month and date separately in respective variables.................
     var today = new Date();
@@ -195,60 +271,7 @@ $(document).ready(function(){
     var age_day = nowDay - birthDay;
 
     if (age_month < 0 || (age_month == 0 && age_day < 0 ) && age >= 18) {
-      //Storing the user input values to the variables................................
-      firstName = $("#first_name").val().trim();
-      lastName = $("#last_name").val().trim();
-      birthDate = $("#birth_date").val().trim();
-      userName = $("#user_name").val().trim();
-      password = $("#password").val().trim();
-      confirmPassword = $("#confirm_password").val().trim();
-      userAdd = $("#user_address").val().trim();
-      userCity = $("#user_city").val().trim();
-      userState = $("#user_state").val().trim();
-      userZip = $("#user_zipcode").val().trim();
-      userPhone = $("#user_phone").val().trim();
-      userEmail = $("#user_email").val().trim();
       
-      //Creating a local temoporary object for holding user information............
-      var userDetail = {
-        fname : firstName,
-        lname : lastName,
-        bDay : birthDate,
-        uname : userName,
-        pwd : password,
-        cpwd : confirmPassword,
-        add : userAdd,
-        city : userCity,
-        state : userState,
-        zip : userZip,
-        phone : userPhone,
-        email : userEmail,
-        dateAdded : firebase.database.ServerValue.TIMESTAMP
-      };
-        
-      //upload the user details to the database...............
-      database.ref().push(userDetail);
-      
-      //Creating a firebase event for adding user details to the database ........................
-      database.ref().on("child_added", function(childSnapshot, preChildKey){
-      console.log("The childSnapshot: " + childSnapshot);
-      
-        //Store to a variable....................
-        var firstName = childSnapshot.val().fname;
-        var lastName = childSnapshot.val().lname;
-        var birthDate = childSnapshot.val().bDay;
-        var userName = childSnapshot.val().uname;
-        var password = childSnapshot.val().pwd;
-        var confirmPassword = childSnapshot.val().cpwd;
-        var address = childSnapshot.val().add;
-        var userCity = childSnapshot.val().city;
-        var userState = childSnapshot.val().state;
-        var userZip = childSnapshot.val().zip;
-        var userPhone = childSnapshot.val().phone;
-        var userEmail = childSnapshot.val().email;
-        }, function(errorObject){
-        console.log("The error message: " + errorObject.code);
-      });
       
       //The reset function is called when all the fields are filled and the user clicks the ok button, 
       //which will be clear all the fileds....................
@@ -263,6 +286,6 @@ $(document).ready(function(){
       var msg2 = $("<h3 class = 'text-center'>").text("You have to be atleast 18 years to sign up.").css("color", "red");
       $("#error_display").append(msg2);
     }
-  }  //End of getAge function...........................
+  } */ //End of getAge function...........................
 
 });     //End of document ready function.............................
