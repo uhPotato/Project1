@@ -31,8 +31,7 @@
   border : none;
 }
 
-input[type=checkbox]
-{
+input[type=checkbox]{
   /* Double-sized Checkboxes */
   -ms-transform: scale(2); /* IE */
   -moz-transform: scale(2); /* FF */
