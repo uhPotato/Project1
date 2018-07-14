@@ -71,7 +71,7 @@ $(document).ready(function(){
 
       database.ref().on("value", function(snapshot){
         for (var obj in snapshot.val()) {
-          console.log("snapshot.val()[obj[1]]");
+         // console.log("snapshot.val()[obj[1]]");
           console.log(snapshot.val()[obj]);
           var userdetails = snapshot.val()[obj].email;
           console.log(userdetails);
@@ -132,18 +132,6 @@ $(document).ready(function(){
             console.log("The error message: " + errorObject.code);
           });          //end of database.ref() ......................  
 
-          //Calling the compareDate() to compare dates.............
-          /*compareDate();
-     
-          // if ((birthYear < nowYear) || (birthYear === nowYear && birthMonth < nowMonth) || (birthYear === nowYear &&       birthMonth === nowMonth && birthDay < nowDay)) {
-            //Calling the age calculation function....................
-            getAge();
-
-            //} else { //if ((birthYear > nowYear) || (birthYear === nowYear && birthMonth > nowMonth) || (birthYear === nowYear &&   birthMonth === nowMonth && birthDay > nowDay)) {
-            // var input = $("#birth_date").focus();
-            //var msg1 = $("<h3 class = 'text-center'>").text("Input date cannot be greater than current date.").css("color", "red");
-            // $("#error_display").append (msg1);
-          } */
         });      //End of add to addtodata click button function................
 
       });        //End to the data ref() for comparing the email and userid..................            
@@ -250,50 +238,5 @@ $(document).ready(function(){
     $("#error_display").empty();
     var input = $("#first_name").focus();
   } //End of reset function...................................
-
-  //Function for comparing than current date with the input date......................
- /* function compareDate() {
-
-    //Getting the current date's year, month and date separately in respective variables.................
-    var today = new Date();
-    nowYear = today.getFullYear();
-    nowMonth = today.getMonth();
-    nowDay = today.getDate();
-
-    //Getting the input date's year, month and date separately in respective variables.................
-    var birthdate = $("#birth_date").val().trim();
-    birthYear = birthdate.getFullYear();
-    birthMonth = birthdate.getMonth();
-    birthDay = birthdate.getDate();
-  }   //End of compareDate function .................
-
-
-  //Function for calculating the age of the user from the date of birth provided in the form.........
-  function getAge() {
-    
-    //calling the compareDate Function...........
-    compareDate();
-    
-    var age = nowYear - birthYear;
-    var age_month = nowMonth - birthMonth;
-    var age_day = nowDay - birthDay;
-
-    if (age_month < 0 || (age_month == 0 && age_day < 0 ) && age >= 18) {
-      
-      
-      //The reset function is called when all the fields are filled and the user clicks the ok button, 
-      //which will be clear all the fileds....................
-      reset();
-            
-      //Then the summaryModal function is called which will display the summary of the user's input
-      // informations before its saved into the database.
-      summaryModal();
-
-    } else {
-      var input = $("#birth_date").focus();
-      var msg2 = $("<h3 class = 'text-center'>").text("You have to be atleast 18 years to sign up.").css("color", "red");
-      $("#error_display").append(msg2);
-    }
-  } */ //End of getAge function...........................
 
 });     //End of document ready function.............................
