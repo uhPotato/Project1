@@ -1,228 +1,236 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Project 1 - Oh, The Things We Will DO!</title>
+	<title>Project 1 - Oh, The Places We Will GO!</title>
 
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Things-to-DO!">
 
-
 	<!-- add link to the jQuery Library -->
-    <!-- <script src="assets/javascript/jquery-3.1.1.min.js"></script> -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
 
-
-	<!-- reset stylesheet not needed because using bootstrap -->
-	<!-- <link rel="stylesheet" type="text/css" href="/assets/css/reset.css"> -->
-
-	<!-- Bootstrap section -->
-	<!-- Link in locally stored min version of bootstrap.css -->
-	<!-- <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css"> -->
-	<!-- Link in locally stored min version of optional bootstrap theme -->
-	<!-- <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-theme.min.css"> -->
-	<!-- Add in locally stored min version of bootstrap javascript -->
 	<!-- <script src="assets/javascript/bootstrap.min.js"></script> -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+	 crossorigin="anonymous">
 
-	<!-- Google Fonts font usage - switched to local file instead - see style.css -->
-	<!-- <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet"> -->
+	<!-- Google Fonts font usage -->
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa|Open+Sans|Rock+Salt" rel="stylesheet">
 
 	<!-- Make final css adjustments with personal stylesheet -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
 </head>
 
+
+
 <body>
-	<div class = "container" id = "main-page">
-		<div>
-  			<button id = "signIn">Sign In</button>
-  		</div>
-		<!-- begin the bootstrap container -->
-		<div class="container">
+	<!-- Background video -->
+	<video autoplay muted loop id="myVideo">
+		<source src="assets\images\Long_shot.mp4" type="video/mp4">
+	</video>
 
-			<!-- title - will be populated later via JS when logo disappears after location is selected -->
-			<div class="row">
-				<div class="col-md-12 page-header" id="titleDiv"></div>
+	<!-- Begin the bootstrap container -->
+	<div class="container-fluid">
+
+		<!-- Row containing sign-in and sign-up buttons -->
+		<div class="row header">
+			<div id="logo-top-left">
+				<h2 style="font-family: 'Rock Salt', cursive">FUN</h2>
+				<h2 style="font-family: 'Comfortaa', cursive">finder.</h2>
 			</div>
 
-			<!-- begin by having logo displayed -->
-			<div class="row" id="logoImageDiv">
-				<div class="col-md-12">
-					<div class="well well-lg">
-						<img src="assets/images/HPLogo.png" class="img-responsive" id="logoImage" alt="Things Logo">
+			<div id="button-div">
+				<a href="sign-in.html">
+					<button type="submit" class="btn btn-danger" id="sign-in">
+						<h3>Sign In</h3>
+					</button>
+				</a>
+				<a href="sign-up.html">
+					<button type="submit" class="btn btn-danger" id="sign-up">
+						<h3>Sign Up</h3>
+					</button>
+				</a>
+			</div>
+		</div>
+
+		<!-- Modal for when nonsense location entered by user -->
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Modal -->
+				<div class="modal fade" id="badLocationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog modal-sm" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title">Please enter a valid location!</h4>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
+		</div>
+		<!-- End of nonsense location modal code -->
 
-			<!-- Modal for when nonsense location entered by user -->
-			<div class="row">
-				<div class="col-md-12">
-					<!-- Modal -->
-					<div class="modal fade" id="badLocationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  						<div class="modal-dialog modal-sm" role="document">
-    						<div class="modal-content">
-     							<div class="modal-header">
-        							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        							<h4 class="modal-title">Please enter a valid location!</h4>
-      							</div>
-    						</div>
-  						</div>
+		<!-- Code for the modal that will display point of interest info detail -->
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title" id="myModalLabel">ADDRESS GOES HERE</h4>
+							</div>
+							<div class="modal-body" id="myModalContent">
+								<!-- first row holds the POI larger image and a small map w/marker -->
+								<div class="row" id="modalRow1">
+									<div class="col-md-8" id="myModalPOIImage"></div>
+									<div class="col-md-4" id="myModalMapImage"></div>
+								</div>
+
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-			<!-- End of nonsense location modal code -->
+		</div>
+		<!-- End of the point of interest modal code -->
 
-			<!-- Code for the modal that will display point of interest info detail -->
-			<div class="row">
-				<div class="col-md-12">
-					<!-- Modal -->
-					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  						<div class="modal-dialog modal-lg" role="document">
-    						<div class="modal-content">
-     							<div class="modal-header">
-        							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        							<h4 class="modal-title" id="myModalLabel">ADDRESS GOES HERE</h4>
-      							</div>
-      							<div class="modal-body" id="myModalContent">
-      								<!-- first row holds the POI larger image and a small map w/marker -->
-      								<div class="row" id="modalRow1">
-      									<div class="col-md-8" id="myModalPOIImage"></div>
-      									<div class="col-md-4" id="myModalMapImage"></div>
-      								</div>
-	      						</div>
-    						</div>
-  						</div>
+		<!-- Row containing logo -->
+		<div class="row" id="logo-row">
+			<div class="col-md-12">
+				<div>
+					<h1 style="font-family: 'Rock Salt', cursive">FUN</h1>
+					<h1 style="font-family: 'Comfortaa', cursive">finder.</h1>
+				</div>
+			</div>
+		</div>
+
+		<!-- location / venue / buttons row -->
+		<div class="row" id="userEntryRow">
+			<!-- location and venue div -->
+			<div class="col-md-12">
+				<!-- begin our form-->
+				<form class="form-inline justify-content-center">
+					<!-- first input is for the location -->
+					<div class="form-group">
+						<!-- <label for="location">Location:</label> -->
+						<input type="text" class="form-control" list="savedLocations" id="location" placeholder="City, State">
+						<datalist id="savedLocations"></datalist>
+					</div>
+
+					<!-- second input is for the venue type -->
+					<div class="form-group">
+						<!-- <label for="venue"> Venue: </label> -->
+						<select class="form-control" id="venue">
+							<option>Amusement Park</option>
+							<option>Art Gallery</option>
+							<option>Museum</option>
+							<option>Park</option>
+							<option>Zoo</option>
+						</select>
+					</div>
+
+					<!-- go button div -->
+					<button type="submit" class="btn btn-danger" id="goButton">GO!</button>
+
+					<!-- reset button div -->
+					<button type="reset" class="btn btn-danger" id="resetButton">RESET!</button>
+
+				</form>
+
+				<!-- end of location and venue div and column -->
+			</div>
+			<!-- end of location and venue row -->
+		</div>
+
+		<!-- Row describing features of app -->
+		<div class="row" id="features-row">
+			<div class="card-group">
+				<div class="card">
+					<img class="card-img-top" id="hotel-icon" src="assets/images/hotel.png" alt="Card image cap">
+					<div class="card-body">
+						<h3 class="card-title">Venture outside the hotel room</h3>
+						<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little
+							bit longer.</p>
+
+					</div>
+				</div>
+				<div class="card">
+					<img class="card-img-top" id="camera-icon" src="assets/images/camera.png" alt="Card image cap">
+					<div class="card-body">
+						<h3 class="card-title">View pictures posted by other visitors</h3>
+						<p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+
+					</div>
+				</div>
+				<div class="card">
+					<img class="card-img-top" id="todolist-icon" src="assets/images/todolist-icon.png" alt="Card image cap">
+					<div class="card-body">
+						<h3 class="card-title">Save your itinerary for future access</h3>
+						<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer
+							content than the first to show that equal height action.</p>
+
 					</div>
 				</div>
 			</div>
-			<!-- End of the point of interest modal code -->
+		</div>
 
-			<!-- location / venue / buttons row -->
-			<div class="row" id="userEntryRow">
-
-				<!-- location and venue div -->
-				<div class="col-md-12 text-center">
-
-					<!-- begin our form-->
-					<form class="form-inline">
-
-						<!-- first input is for the location -->
-		  				<div class="form-group">
-		    				<label for="location">Location: </label>
-		    				<input type="text" class="form-control" list="savedLocations" id="location" placeholder="Destination">
-		    				<datalist id="savedLocations"></datalist>
-		  				</div>
-
-						<!-- second input is for the venue type -->
-		  				<div class="form-group">
-	    					<label for="venue"> Venue: </label>
-		   					<select class="form-control" id="venue">
-		   						<option>Amusement Park</option>
-		   						<option>Art Gallery</option>
-		   						<option>Museum</option>
-		   						<option>Park</option>
-		   						<option>Zoo</option>
-							</select>
-	  					</div>
-
-						<!-- go button div -->
-						<button type="submit" class="btn btn-danger" id="goButton">GO!</button>
-
-						<!-- reset button div -->
-						<button type="reset" class="btn btn-danger" id="resetButton">RESET!</button>
+		<!-- map row & to-do list-->
+		<div class="row" id="mapRow">
+			<div class="col-md-4" style="background-color: white">
+				<div style="overflow: auto;">
+					<form>
+						<span id="todo-item">Your Personalized Itinerary
+							<input id="to-do" type="text">
+							<input id="add-to-do" value="Add Item" type="submit">
+						</span>
 					</form>
 
-					<!-- end of location and venue div and column -->
+					<!-- To-Do List -->
+					<div id="to-dos"></div>
+
 				</div>
-				<!-- end of location and venue row -->
 			</div>
 
-			<!-- map row -->
-			<div class="row" id="mapRow">
-				<div class="panel panel-default">
-				<div class="panel-body">
-	    		<!-- populate map in this column -->
-		    	<div class="col-md-12 col-lg-10" id="map"></div>
-			</div></div></div>
+			<div class="col-md-8">
 
-			<!-- photos row -->
-			<div class="row" id="photosDiv">
-				<div class="panel panel-default">
-				<div class="panel-body">
+				<div id="map"></div>
 
-					<!-- column 1 -->
-					<div class="col-md-3 col-lg-2">
+				<div id="photosDiv">
+					<div id="image1"></div>
+					<div id="image2"></div>
+					<div id="image3"></div>
+					<div id="image4"></div>
+					<div id="image5"></div>
+					<div id="image6"></div>
+				</div>
 
-						<!-- image 1 row -->
-						<div class="row">
-							<div class="col-md-12" id="image1"></div>
-						</div>
+				<!-- reload button - empty for now - populate with function that loads images -->
+				<div id="reloadButtonDiv"></div>
 
-						<!-- imaged 4 row -->
-						<div class="row">
-							<div class="col-md-12" id="image4"></div>
-						</div>
-
-						<!-- end column 1 -->
-					</div>
-
-					<!-- column 2 -->
-					<div class="col-md-3">
-
-						<!-- image 2 row -->
-						<div class="row">
-							<div class="col-md-12" id="image2"></div>
-						</div>
-
-						<!-- image 5 row -->
-						<div class="row">
-							<div class="col-md-12" id="image5"></div>
-						</div>
-
-						<!-- end column 2 -->
-					</div>
-
-					<!-- column 3 -->
-					<div class="col-md-3">
-
-						<!-- image 3 row -->
-						<div class="row">
-							<div class="col-md-12" id="image3"></div>
-						</div>
-
-						<!-- image 6 row -->
-						<div class="row">
-							<div class="col-md-12" id="image6"></div>
-						</div>	
-
-						<!-- end column 3 -->
-					</div>
-
-					<!-- column 4 -->
-					<!-- reload button - empty for now - populate with function that loads images -->
-					<div class="col-md-3" id="reloadButtonDiv">
-
-						<!-- end column 4 -->
-					</div>
-
-					<!-- end photos row -->
-				</div></div>
 			</div>
-			<!-- end the bootstrap container -->
 		</div>
+
 	</div>
 
 
-	<!-- Link to modal JS -->
-    <!-- <script type="text/javascript" src="assets/javascript/modal.js"></script> -->
 
-    <!-- link to jquery-->
+	<!-- Footer -->
 
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+	<footer>
+		<p> &copy; Team of Philip - Reena - Jeremiah - Ei Wai </p>
+	</footer>
 
-    <!-- additional api -> Link to flickr JS -->
+	<!-- additional api -> Link to flickr JS -->
 	<script type="text/javascript" src="assets/javascript/flickr.js"></script>
 
 	<!-- Link to the app javascript -->
