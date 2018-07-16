@@ -1,0 +1,89 @@
+body {
+  background-image : url("../images/Long_shot.jpg");
+  background-position-y: -70px;
+}
+.container {
+    margin-top : 90px;
+    margin : auto;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 20px;
+    font-weight: bolder;
+    letter-spacing: .15em;;
+  }
+
+  #row1 {
+    margin-top: auto;
+  }
+  
+  .card {
+    margin-top : 20px;
+    background-color : rgb(74, 133, 7);
+    border : none;
+    color : rgb(255, 255, 255);
+    font-display : block;
+    font-weight: 900px;
+  }
+
+  .card-header{
+    border : none;
+  }
+
+  #google, #facebook{
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(1); /* IE */
+    -moz-transform: scale(1); /* FF */
+    -webkit-transform: scale(1.5); /* Safari and Chrome */
+    -o-transform: scale(1); /* Opera */
+    padding: 5px;
+    margin : 10px;
+    float : right;
+    cursor: pointer;
+  }
+
+  #google{
+    color: rgb(39, 131, 235);
+  }
+
+  #facebook{
+    color: rgb(38, 95, 180);
+  }
+
+  #head{
+    margin : 0 10px;
+    border-bottom : solid;
+    border-bottom-color : rgb(56, 104, 6);
+  }
+    
+  .form-control {
+    margin : 2px;
+    padding : 6px;
+    width : 100%;
+    font-size : 20px;
+    font-weight : bold;
+    letter-spacing: .15em;
+    color: rgb(74, 133, 7);
+  }
+  #error_display{
+    display : none;
+    /*background : white;*/
+    font-size : 15px;
+  }
+
+  #signin, #cancel{
+    width : 100%;
+    color : rgb(255, 255, 255);
+    background-color : rgb(74, 133, 7);
+    border : none;
+    cursor: pointer;
+  }
+
+  #signin:hover, #cancel:hover {
+    background-color :rgba(58, 223, 25, 0.37);
+  }
+
+  a {
+    font-size: 15px;
+    color : rgb(255, 255, 255);
+    text-decoration: none;
+  }
+

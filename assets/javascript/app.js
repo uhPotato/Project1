@@ -1,4 +1,14 @@
 
+//A welcome msg is displayed when the user signin...........
+var msg = $("<h2 class = 'text-center'>").text("Welcome to FUNfindr!!").css("color", "maroon");
+$("#welcomeMsg").append(msg);
+
+
+//capture the signIn button click.................
+$("#signIn").on("click", function(){
+    //Redirecting to the sign In page...............................
+    $(location).attr("href", "///C:/Users/Reena/Desktop/code_class/Project1/signin.html");
+});
 
 
 // initMap function is called first by the Google Maps object generated in index.html

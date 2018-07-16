@@ -20,21 +20,30 @@ $(document).ready(function(){
   var userPassword = "";
 
   //Putting the focus on the first field of the form...................
-  var input = $("#email-input").focus();
+  var input = $("#user_email").focus();
+
+  //Clears and hides the error display div when the user starts correcting the respective filed...................
+  clearErrorDisplay();
+
+
+
 
   //Capturing the search user button click........................
   $("#signin").on("click", function(event){
     event.preventDefault();  
 
-    if ($("#email-input").val(), $("#password-input").val() === "") {
-      var msg = $("<h3 class ='text-center'>").text("Please fill all the fields before submitting the form.").css("color", "red");
+    if ($("#user_email").val(), $("#password").val() === "") {
+      console.log("This is the email: " + $("#user_email").val());
+      console.log("This is the password: " + $("#password").val());
+      $("#error_display").show();
+      var msg = $("<h3 class ='text-center'>").text("Please fill all the fields before submitting the form.").css("color", "white");
       $("#error_display").append(msg);
-      $("#email-input").focus();
+      $("#user_email").focus();
     } else {
 
       //Storing the user input values to the variables................................
-      userEmail = $("#email-input").val().trim();
-      userPassword = $("#password-input").val().trim();
+      userEmail = $("#user_email").val().trim();
+      userPassword = $("#password").val().trim();
       database.ref().on("value", function(snapshot){
         for (var obj in snapshot.val()) {
           console.log(snapshot.val()[obj]);
@@ -51,17 +60,18 @@ $(document).ready(function(){
           //check each object email and compare to user email;
           //if found return false;
           if (useremaildetails === userEmail && userpassworddetails === userPassword) {
-          alert("We found your data, yey!!");
-          return;
-          end;
+            $(location).attr('href', '///C:/Users/Reena/Desktop/code_class/Project1/index.html');
+            return;
+            end;
           } 
         } 
         
-        var msg = $("<h3 class ='text-center'>").text("Please check your email and password.").css("color", "red");
+        $("#error_display").show();
+        var msg = $("<h3 class ='text-center'>").text("Please check your email and password.").css("color", "white");
         $("#error_display").append(msg);
-        $("#email-input").val("");
-        $("#password-input").val("");
-        $("#email-input").focus();
+        //$("#user_email").val("");
+        $("#password").val("");
+        $("#user_email").focus();
           return;
           end;
          
@@ -72,6 +82,25 @@ $(document).ready(function(){
       });
 
 
-    }
+    }  //End of else if bracket...................
+  });  //End of signin on click button..................
+
+  $("#cancel").on("click", function() {
+    $("#error_display").empty();
+    $("#error_display").hide();
   });
+
+  //This function will be called after the error message is displayed and the user corrects the respective field.......
+  function clearErrorDisplay() {
+    $("#user_email").on("keyup", function(){
+      $("#error_display").empty();
+      $("#error_display").hide();
+    });
+
+    $("#password").on("keyup", function(){
+      $("#error_display").empty();
+      $("#error_display").hide();
+    });
+  }
+
 });

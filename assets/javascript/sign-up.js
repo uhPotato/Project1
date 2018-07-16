@@ -39,16 +39,26 @@ $(document).ready(function(){
   //Putting the focus on the first field of the form...................
   var input = $("#first_name").focus();
 
+  //Calling the disableSignIn() function which will disable the submit button.............
+  disableSubmit();
+
   //Validate the signup form for empty or invalid entry in the fields............... 
   validateForm();
+
+  //Clears and hides the error display div when the user starts correcting the respective fileds...................
+  clearErrorDisplay();
 
   //Capturing the add user button click........................
   $("#add-user").on("click", function(event){
     event.preventDefault();  
+    //var check = $('#birth_date');
+    //var hasChecked = true;
 
-    if ($("#first_name").val(), $("#last_name").val(), $("#user_name").val(), $("#password").val(), $("#user_address").val(),$("#user_zipcode").val(), $("#user_phone").val(), $("#user_email").val() === "" && $("#birth_date").val() === "on") {
-
-      var msg = $("<h3 class ='text-center'>").text("Please fill all the fields before submitting the form.").css("color", "red");
+    if ($("#first_name").val(), $("#last_name").val(), $("#user_name").val(), $("#password").val(), $("#user_address").val(),$("#user_zipcode").val(), $("#user_phone").val(), $("#user_email").val() === "" ){     //&& check !== check.checked) {
+           
+      $("#error_display").show();
+      var msg = $("<h3 class ='text-center'>").text("Please fill all the fields before submitting the form.").css("color", "rgba(74, 133, 7)", "background-color", "rgba(74, 133, 7, .2)");
+      
       $("#error_display").append(msg);
       var input = $("#first_name").focus();
 
@@ -57,7 +67,8 @@ $(document).ready(function(){
       //Storing the user input values to the variables................................
       firstName = $("#first_name").val().trim();
       lastName = $("#last_name").val().trim();
-      birthDate = $("#birth_date").val().trim();
+      //birthDate = hasChecked;
+      //console.log(birthDate);
       userName = $("#user_name").val().trim();
       password = $("#password").val().trim();
       confirmPassword = $("#confirm_password").val().trim();
@@ -67,19 +78,33 @@ $(document).ready(function(){
       userZip = $("#user_zipcode").val().trim();
       userPhone = $("#user_phone").val().trim();
       userEmail = $("#user_email").val().trim();
-      console.log("This is the user input details: " + firstName );  
+    
 
       database.ref().on("value", function(snapshot){
         for (var obj in snapshot.val()) {
          // console.log("snapshot.val()[obj[1]]");
           console.log(snapshot.val()[obj]);
-          var userdetails = snapshot.val()[obj].email;
+          var userdetails = snapshot.val()[obj].uname;
           console.log(userdetails);
-          //check each object email and compare to user email;
+          var useremaildetails = snapshot.val()[obj].email;
+          console.log(useremaildetails);
+          //check each object username and email and compare to user name and email;
           //if found return false;
-          if (userEmail === userdetails) {
-           alert(userEmail + "Email id already exists");
-           $("#user_email").focus();
+          
+          if (userName === userdetails) {
+            $("#error_display").show();
+            var msg1 = $("<h3 class ='text-center'>").text(userName + ":  Username already exists").css("color", "rgba(74, 133, 7)", "background-color", "rgba(74, 133, 7, .2)");
+            $("#error_display").append(msg1);
+            $("#user_name").focus();
+           return;
+           end;
+          }
+
+          if (userEmail === useremaildetails) {
+            $("#error_display").show();
+            var msg1 = $("<h3 class ='text-center'>").text(userEmail + ":  Email id already exists").css("color", "rgba(74, 133, 7)", "background-color", "rgba(74, 133, 7, .2)");
+            $("#error_display").append(msg1);
+            $("#user_email").focus(); 
            return;
            end;
           } 
@@ -87,55 +112,57 @@ $(document).ready(function(){
         //if found return true;
         //Then the summaryModal function is called which will display the summary of the user's input
         // informations before its saved into the database.
-        summaryModal();
-          
-        //Capturing the save button of the summary page, so the user will check their entry and save to the database..
-        $("#addtodata").on("click", function(){
-          //Creating a local temoporary object for holding user information............
-          var userDetail = {
-          fname : firstName,
-          lname : lastName,
-          bDay : birthDate,
-          uname : userName,
-          pwd : password,
-          cpwd : confirmPassword,
-          add : userAdd,
-          city : userCity,
-          state : userState,
-          zip : userZip,
-          phone : userPhone,
-          email : userEmail,
-          dateAdded : firebase.database.ServerValue.TIMESTAMP
-          };
-               
-          //upload the user details to the database...............
-          database.ref().push(userDetail);
-            
-          //Creating a firebase event for adding user details to the database ........................
-          database.ref().on("child_added", function(childSnapshot, preChildKey){
-            console.log("The childSnapshot: " + childSnapshot);
+        summaryModal(); 
+      }); //end of database.ref() ......................    
+   }  //End of if bracket................
+     
+    //Capturing the save button of the summary page, so the user will check their entry and save to the database..
+    $("#addtodata").on("click", function(){
+      //Creating a local temoporary object for holding user information............
+      var userDetail = {
+        fname : firstName,
+        lname : lastName,
+        bDay : birthDate,
+        uname : userName,
+        pwd : password,
+        cpwd : confirmPassword,
+        add : userAdd,
+        city : userCity,
+        state : userState,
+        zip : userZip,
+        phone : userPhone,
+        email : userEmail,
+        dateAdded : firebase.database.ServerValue.TIMESTAMP
+      };
+              
+      //upload the user details to the database...............
+      database.ref().push(userDetail);
+         
+      //Creating a firebase event for adding user details to the database ........................
+      database.ref().on("child_added", function(childSnapshot, preChildKey){
+        console.log("The childSnapshot: " + childSnapshot);
            
-           //Store to a variable....................
-            var firstName = childSnapshot.val().fname;
-            var lastName = childSnapshot.val().lname;
-            var birthDate = childSnapshot.val().bDay;
-            var userName = childSnapshot.val().uname;
-            var password = childSnapshot.val().pwd;
-            var confirmPassword = childSnapshot.val().cpwd;
-            var userAdd = childSnapshot.val().add;
-            var userCity = childSnapshot.val().city;
-            var userState = childSnapshot.val().state;
-            var userZip = childSnapshot.val().zip;
-            var userPhone = childSnapshot.val().phone;
-            var userEmail = childSnapshot.val().email;
-            }, function(errorObject){
-            console.log("The error message: " + errorObject.code);
-          });          //end of database.ref() ......................  
+        //Store to a variable....................
+        var firstName = childSnapshot.val().fname;
+        var lastName = childSnapshot.val().lname;
+        var birthDate = childSnapshot.val().bDay;
+        var userName = childSnapshot.val().uname;
+        var password = childSnapshot.val().pwd;
+        var confirmPassword = childSnapshot.val().cpwd;
+        var userAdd = childSnapshot.val().add;
+        var userCity = childSnapshot.val().city;
+        var userState = childSnapshot.val().state;
+        var userZip = childSnapshot.val().zip;
+        var userPhone = childSnapshot.val().phone;
+        var userEmail = childSnapshot.val().email;
+        }, function(errorObject){
+        console.log("The error message: " + errorObject.code);
+        return;          
 
-        });      //End of add to addtodata click button function................
+      });      //End of data.ref().on(child_added) function................
+      reset();
 
-      });        //End to the data ref() for comparing the email and userid..................            
-    }            //End of else statement for add-user button click...............     
+    });        //End of add to addtodata click button function................        
   });            //End of add-user button click........................
 
   //Capturing the reset button, where all fields in HTML will be initialized...............
@@ -147,16 +174,15 @@ $(document).ready(function(){
   function summaryModal(){
     $("#modal-window").css("display", "block");
     $("#signIn").hide();//css("display", "none");
-    var p1 = $("<p>").text("Full Name : " + firstName + " " + lastName);
-    var p2 = $("<p>").text("Birth Date: " + birthDate);
-    var p3 = $("<p>").text("User Name: " + userName);
-    var p4 = $("<p>").text("Address: " + userAdd);
-    var p5 = $("<p>").text("City: " + userCity);
-    var p6 = $("<p>").text("State: " + userState);
-    var p7 = $("<p>").text("Zip Code: " + userZip);
-    var p8 = $("<p>").text("Phone No: " + userPhone);
-    var p9 = $("<p>").text("Email: " + userEmail);
-    console.log("This is the data to be displayed in the modal: ")
+    var p1 = $("<p>").text("Full Name :  " + firstName + " " + lastName);
+    var p2 = $("<p>").text("Birth Date:  " + birthDate);
+    var p3 = $("<p>").text("User Name:  " + userName);
+    var p4 = $("<p>").text("Address:  " + userAdd);
+    var p5 = $("<p>").text("City:  " + userCity);
+    var p6 = $("<p>").text("State:  " + userState);
+    var p7 = $("<p>").text("Zip Code:  " + userZip);
+    var p8 = $("<p>").text("Phone No:  " + userPhone);
+    var p9 = $("<p>").text("Email:  " + userEmail);
     $("#summary-message").append(p1, p2, p3, p4, p5, p6, p7, p8, p9);
   } //End of summaryModal function...............................
   
@@ -214,9 +240,9 @@ $(document).ready(function(){
           email : "Please provide a valid email address"
         }
       },
-      submitHandler : function(form) {
+      /*submitHandler : function(form) {
         $(form).summaryModal();
-      } 
+    } */
        
     });
   } //End of validateForm function.................................
@@ -236,7 +262,40 @@ $(document).ready(function(){
     $("#user_phone").val("");
     $("#user_email").val("");
     $("#error_display").empty();
-    var input = $("#first_name").focus();
+    $("#error_display").hide();
+    $("#first_name").focus();
+    disableSubmit();
   } //End of reset function...................................
+
+  //This function will be called after the error message is displayed and the user corrects the respective fields.......
+  function clearErrorDisplay() {
+    $("#first_name").on("keyup", function(){
+      $("#error_display").empty();
+      $("#error_display").hide();
+    });
+    
+    $("#user_name").on("keyup", function(){
+      $("#error_display").empty();
+      $("#error_display").hide();
+    });
+    
+    $("#user_email").on("keyup", function(){
+      $("#error_display").empty();
+      $("#error_display").hide();
+    });
+  }
+
+  //This function will be called when the page loads and disable the submit button on till the checkbox has been ckecked................
+  function disableSubmit() {
+    $("#add-user").attr('disabled', 'disabled').css("color", "rgba(31, 56, 2)", "cursor", "none");
+
+    $("#birth_date").change(function(e){
+      if (this.checked) {
+        $("#add-user").removeAttr("disabled").css("color", "white", "cursor", "pointer");
+      } else {
+        $("#add-user").attr('disabled', 'disabled').css("color", "rgba(31, 56, 2)", "cursor", "none");
+      }
+    });
+  }
 
 });     //End of document ready function.............................
