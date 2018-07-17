@@ -1,13 +1,15 @@
-var config = {
-    apiKey: "AIzaSyC-U0veMrTRx7m4ACfowxLg0G3xSV6eTDo",
-    authDomain: "my-first-project-c1a72.firebaseapp.com",
-    databaseURL: "https://my-first-project-c1a72.firebaseio.com",
-    projectId: "my-first-project-c1a72",
-    storageBucket: "my-first-project-c1a72.appspot.com"
-  };
 
-firebase.initializeApp(config);
-var database = firebase.database();
+//A welcome msg is displayed when the user signin...........
+var msg = $("<h2 class = 'text-center'>").text("Welcome to FUNfindr!!").css("color", "maroon");
+$("#welcomeMsg").append(msg);
+
+
+//capture the signIn button click.................
+$("#signIn").on("click", function(){
+    //Redirecting to the sign In page...............................
+    $(location).attr("href", "///C:/Users/Reena/Desktop/code_class/Project1/signin.html");
+});
+
 
 // initMap function is called first by the Google Maps object generated in index.html
 function initMap() {
@@ -32,6 +34,7 @@ function initMap() {
         // because the assumption is new images will be loaded for new location
         $("#photosDiv").hide();
 
+        // Hide/show the rest of this stuff
         $("#logo-top-left").show();
         $("#userEntryRow").hide();
         $("#logo-row").hide();
@@ -161,13 +164,11 @@ function initMap() {
 // longitude, and venue type passed to it from the initMap function
 function buildMap(venue) {
 
-    /*
     // first remove the logo
     $("#logoImageDiv").hide();
     // and replace it with a smaller title
     $("#titleDiv").show();
-    $("#titleDiv").html('<div class="panel panel-danger"><div class="panel-heading"><h1 class="text-center" id="text-center"</div></div></div>');
-    */
+    $("#titleDiv").html('<div class="panel panel-danger"><div class="panel-heading"><h1 class="text-center">Oh, The Things We Will Do!</div></div></div>');
 
     // Google Maps Map API requires that it be fed an object
     // containing latitude and longitude. Create this
@@ -352,61 +353,3 @@ function getImages(somePlace) {
 
 // End of the getImages function
 }
-
-//To-do List
-var toDoCount = 0;
-
-    //  On Click event associated with the add-to-do function
-    $("#add-to-do").on("click", function(event) {
-      event.preventDefault();
-
-      // Get the to-do "value" from the textbox and store it a variable
-      var toDoTask = $("#to-do").val().trim();
-      var toDoObject = {
-        to_do: toDoTask
-      }
-      database.ref().push(toDoObject);
-      // Create a new variable that will hold a "<p>" tag.
-      // Then give it an ID in the following form:
-      // "item-4" or "item-3" or "item-99", where the number is equal to toDoCount.
-      // Then append the to-do "value" as text to this <p> element.
-      var toDoItem = $("<p>");
-
-      toDoItem.attr("id", "item-" + toDoCount);
-      toDoItem.append(" " + toDoTask);
-
-      // Create a button with unique identifiers based on what number it is in the list. Again use jQuery to do this.
-      // Give your button a data attribute called data-to-do and a class called "checkbox".
-      // Lastly append the letter X inside.
-
-      var toDoClose = $("<button>");
-
-      toDoClose.attr("data-to-do", toDoCount);
-      toDoClose.addClass("checkbox");
-      toDoClose.append("✓");
-
-      // Append the button to the to do item
-      toDoItem = toDoItem.prepend(toDoClose);
-
-      // Add the button and to do item to the to-dos div
-      $("#to-dos").append(toDoItem);
-
-      // Clear the textbox when done
-      $("#to-do").val("");
-
-      // Add to the toDoCount
-      toDoCount++;
-    });
-
-    // When a user clicks a check box then delete the specific content
-    // (NOTE: Pay attention to the unusual syntax here for the click event.
-    // Because we are creating click events on "dynamic" content, we can't just use the usual "on" "click" syntax.)
-    $(document.body).on("click", ".checkbox", function() {
-
-      // Get the number of the button from its data attribute and hold in a variable called  toDoNumber.
-      var toDoNumber = $(this).attr("data-to-do");
-
-      // Select and Remove the specific <p> element that previously held the to do item number.
-      $("#item-" + toDoNumber).remove();
-    });
-
