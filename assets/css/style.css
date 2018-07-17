@@ -174,7 +174,17 @@ table {
 	
 }
 
+
 #photosDiv {
 	margin-top: 10px;
-	
+}
+
+#reloadButton {
+	margin-top: 20px;
+}
+
+.signInBtn {
+	float: right;
+	margin-bottom: 15px;
+
 }
