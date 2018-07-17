@@ -1,0 +1,109 @@
+
+body {
+  background: url("../images/Long_shot.jpg") no-repeat center center fixed;
+}
+#signup{
+  margin-top : 20px;
+  background-color: rgba(74, 133, 7, .2);
+  background-size: 100%;
+  background-size: cover;
+  background-blend-mode: exclusion;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 20px;
+  font-weight: bolder;
+  letter-spacing: .35em;;
+}
+
+.card {
+  margin-top : 20px;
+  background: transparent;
+  border : none;
+  color : white;  /* rgb(87, 4, 4);*/
+  font-display : block;
+  font-weight: 900px;
+}
+
+.form-control {
+  margin : 2px;
+  padding : 6px;
+  font-size : 20px;
+  font-weight : bold;
+  letter-spacing: .35em;
+  color: rgba(74, 133, 7); 
+  color: rgb(31, 56, 2); 
+  border : none;
+}
+
+input[type=checkbox]{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 10px;
+}
+#birth_date{
+  margin : 10px;
+  padding : 10px;
+  font-size : 110%;
+  display : inline;
+}
+.uadd, .ucity, .ustate, .uzip, .uphone, .uemail {
+   border : none;
+}
+
+#cpwd{
+  letter-spacing: .1em;
+}
+
+#error_display {
+  display : none;
+  background : white;
+}
+
+.modal {
+  margin : auto;
+  z-index : 1;
+  width : auto;
+  height : auto;
+  overflow : auto;
+  background: url("../images/Long_shot.jpg") no-repeat center center fixed;
+  font-size : 20px;
+  border-radius : 10px;
+}
+
+.modal-dialog {
+ margin-top : 150px;
+}
+.modal-header, .modal-footer {
+  background-color :rgba(74, 133, 7);
+  color : white;
+  align-items: center;
+}
+.modal-body {
+  background-color : white;
+}
+button {
+  align-self: center;
+  background : transparent;
+  border : none;
+}
+
+button a {
+  color : white;
+  text-decoration: none;
+  font-size : 25px;
+  letter-spacing: .15em;
+}
+#add-user, #reset-user {
+  margin : 0 5px;
+  background : transparent;  /* rgb(26, 117, 255);*/
+  border : none;
+  padding : 5px 10px;
+  cursor: pointer;
+  color : white;
+  font-size :20px;
+  font-weight: bolder;
+  letter-spacing: .25em;
+}
+  

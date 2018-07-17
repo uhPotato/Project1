@@ -1,4 +1,14 @@
 
+//A welcome msg is displayed when the user signin...........
+var msg = $("<h2 class = 'text-center'>").text("Welcome to FUNfindr!!").css("color", "maroon");
+$("#welcomeMsg").append(msg);
+
+
+//capture the signIn button click.................
+$("#signIn").on("click", function(){
+    //Redirecting to the sign In page...............................
+    $(location).attr("href", "///C:/Users/Reena/Desktop/code_class/Project1/signin.html");
+});
 
 
 // initMap function is called first by the Google Maps object generated in index.html
@@ -10,6 +20,7 @@ function initMap() {
     $("#mapRow").hide();
     $("#photosDiv").hide();
     $("#titleDiv").hide();
+    $("#logo-top-left").hide();
 
     // add a listener for the reset button that reloads the site
     $("#resetButton").on("click", function() {
@@ -22,6 +33,13 @@ function initMap() {
         // Whenever the Go button is hit, we want to hide the photos div
         // because the assumption is new images will be loaded for new location
         $("#photosDiv").hide();
+
+        // Hide/show the rest of this stuff
+        $("#logo-top-left").show();
+        $("#userEntryRow").hide();
+        $("#logo-row").hide();
+        $("#features-row").hide();
+        $("footer").hide();
 
         // For testing - log what the user entered for location
         console.log("in initMap function user entered #location as: " + $("#location").val());
